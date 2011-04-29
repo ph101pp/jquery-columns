@@ -49,6 +49,7 @@ $.fn.greenishColumns = function (opts){
 
 	
 	$(window).scroll($.gC.scroll);
+	$(window).resize($.gC.scroll);
 	
 };
 $.gC = $().greenishColumns;
