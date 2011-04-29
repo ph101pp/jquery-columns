@@ -25,19 +25,13 @@ $.fn.greenishColumns = function (opts){
 	cols=[]
 	for(key in sort.sort()) cols[key]=group[sort[key]];
 	
-	for(i=cols.length-1; i >=0 ; i--) {
+	for(i=0; i < cols.length ; i++) {
 		data[i]={};
 		col=cols[i];
 //		Get content Height
-		col
-			.addClass("greenishColumns")
-			.wrapInner("<div id=\"gCsize\"/>");
-		
+		col.addClass("greenishColumns").wrapInner("<div id=\"gCsize\"/>");
 		data[i]["height"]=$("#gCsize").innerHeight();
-		
-		$("#gCsize")
-			.children()
-			.unwrap();
+		$("#gCsize").children().unwrap();
 
 //		Set min Scroll Position
 		data[i]["minScroll"]=height;
@@ -47,12 +41,11 @@ $.fn.greenishColumns = function (opts){
 		col.scrollTop(data[i]["minScroll"]);
 	}
 
-//	Set body min-height if its the last column.
-	bodyHeight=cols[0].offset()["top"]+(data[0].height-data[0].minScroll)+($(window).height()-cols[0].offset()["top"]-cols[0].innerHeight());
+//	Set body min-height according to last column.
+	i=cols.length-1;
+	bodyHeight=cols[i].offset()["top"]+(data[i].height-data[i].minScroll)+($(window).height()-cols[i].offset()["top"]-cols[i].innerHeight());
 	if(parseFloat($("body").css("min-height").replace("px","")) < bodyHeight)  
 		$("body").css("min-height", bodyHeight);
-
-
 
 	
 	$(window).scroll($.gC.scroll);
