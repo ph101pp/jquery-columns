@@ -15,20 +15,17 @@ $.fn.greenishColumns = function (opts){
 		data={},
 		group={};
 		
-	
-
 //	Order Elements: First ids alphabetical then nonIDs by dom placment.. and the whole thing in revers for later calculations.
 	for(i=0; i < cols.length ; i++) {
 		col=cols.eq(i);
-		id=col.attr("id")?":"+(cols.length-i)+":"+col.attr("id") : "."+(cols.length-i)+"."+i;
+		id=col.attr("id")?":"+(i)+":"+col.attr("id") : "."+(i)+"."+i;
 		group[id] = col;	
 		sort[i]=id;
 	};
 	cols=[]
 	for(key in sort.sort()) cols[key]=group[sort[key]];
 	
-
-	for(i=0; i < cols.length ; i++) {
+	for(i=cols.length-1; i >=0 ; i--) {
 		data[i]={};
 		col=cols[i];
 //		Get content Height
@@ -41,17 +38,13 @@ $.fn.greenishColumns = function (opts){
 		$("#gCsize")
 			.children()
 			.unwrap();
-			
-		data[i]["maxScroll"]=data[i]["height"]-height;
-		height+=col.innerHeight();
-	}
-	height=0;
-	for(i=cols.length-1; i >=0 ; i--) {
-		col=cols[i];
-		col.scrollTop(height);
+
+//		Set min Scroll Position
 		data[i]["minScroll"]=height;
 		height+=col.innerHeight()
 		col.data("data",data[i]);
+		
+		col.scrollTop(data[i]["minScroll"]);
 	}
 
 //	Set body min-height if its the last column.
@@ -62,7 +55,7 @@ $.fn.greenishColumns = function (opts){
 
 
 	
-	$(document).scroll($.gC.scroll);
+	$(window).scroll($.gC.scroll);
 	
 };
 $.gC = $().greenishColumns;
@@ -72,25 +65,14 @@ $.extend($.gC, {
 ////////////////////////////////////////////////////////////////////////////////
 	scroll: function (e) {
 		var scrollTop=$(this).scrollTop(),
-			scrolled=scrollTop-$.gC.scrollTop,
 			columns=$(".greenishColumns"),
-			column, data
-			;
-			
-		$.gC.scrollTop=scrollTop;
-		
+			column, data;
+
 		for(i=0; i<columns.length; i++) {
 			column=columns.eq(i),
 			data=column.data("data");
-			scrollTop=column.scrollTop()+scrolled;
-
-			if(scrollTop < data.minScroll) scrollTop=data.minScroll;
-			else if(scrollTop > data.maxScroll) scrollTop=data.minScroll;
-			
-			column.scrollTop(scrollTop);
+			column.scrollTop(scrollTop+data.minScroll);
 		};
-	
-	
 	}
 ////////////////////////////////////////////////////////////////////////////////
 });
