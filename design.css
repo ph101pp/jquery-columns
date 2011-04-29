@@ -1,0 +1,25 @@
+
+body {
+	margin:0;
+	padding:0;
+}
+
+.column {
+	position:fixed;
+	width:320px;
+	height:480px;
+	left:50%;
+	top:40px;
+	margin-left:-160px;
+	background-color:#ffeeff;
+	overflow:hidden;
+}
+
+.column2 {
+	margin-left:160px;
+
+}
+.column3 {
+	margin-left:-480px;
+
+}
