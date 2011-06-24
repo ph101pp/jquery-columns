@@ -11,7 +11,7 @@
 		<script type="text/javascript">
 			(function($) {
 				$(document).ready(function() { 
-					$(".column").greenishColumns();
+					setTimeout(function(){$(".column").greenishColumns()}, 100);
 				});
 			})(jQuery);
 		</script>		
@@ -19,6 +19,15 @@
 	<body>
 
 		<div class="column">
+<!-- 
+			<img src="//placekitten.com/320/1638" height="1638">
+ -->
+			<img src="Mobile-Web-Design2.jpg" height="1638">
+		</div>		
+		<div class="column column2">
+<!-- 
+			<img src="//placekitten.com/320/1638" height="1638">
+ -->
 			<img src="Mobile-Web-Design2.jpg" height="1638">
 		</div>
 	</body>
