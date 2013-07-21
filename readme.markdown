@@ -1,4 +1,4 @@
-#greenishColumns
+#jQuery Columns
 
 This is going to be a rebuild of an old php/js script from 2008.
 
